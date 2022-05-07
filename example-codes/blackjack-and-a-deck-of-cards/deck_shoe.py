@@ -24,12 +24,12 @@ class Shoe:
         self.shuffle()
 
     def create_shoe(self):
-        for decks in range(0, self.__number_of_decks):
+        for _ in range(self.__number_of_decks):
             self.__cards.add(Deck().get_cards())
 
     def shuffle(self):
         card_count = self.__cards.size()
-        for i in range(0, card_count):
+        for i in range(card_count):
             j = random.randrange(0, card_count - i - 1, 1)
             self.__cards[i], self.__cards[j] = self.__cards[j], self.__cards[i]
 

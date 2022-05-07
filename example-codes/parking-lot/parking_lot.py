@@ -66,7 +66,7 @@ class ParkingLot:
 
     def is_full(self, type):
         # trucks and vans can only be parked in LargeSpot
-        if type == VehicleType.Truck or type == VehicleType.Van:
+        if type in [VehicleType.Truck, VehicleType.Van]:
             return self.__large_spot_count >= self.__max_large_count
 
         # motorbikes can only be parked at motorbike spots
@@ -105,10 +105,10 @@ class ParkingLot:
                 large_spot_count += 1
 
         def is_full(self):
-            for key in self.__parking_floors:
-                if not self.__parking_floors.get(key).is_full():
-                    return False
-            return True
+            return all(
+                self.__parking_floors.get(key).is_full()
+                for key in self.__parking_floors
+            )
 
         def add_parking_floor(self, floor):
             # store in database

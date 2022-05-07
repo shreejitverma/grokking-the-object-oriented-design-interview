@@ -18,7 +18,7 @@ class Employee(Person):
 
 # Driver code
 emp = Person("Person 1")
-print("{} is employee: {}".format(emp.get_name(), emp.is_employee()))
+print(f"{emp.get_name()} is employee: {emp.is_employee()}")
 
 emp = Employee("Employee 1")
-print("{} is employee: {}".format(emp.get_name(), emp.is_employee()))
+print(f"{emp.get_name()} is employee: {emp.is_employee()}")

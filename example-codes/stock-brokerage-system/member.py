@@ -71,5 +71,5 @@ class Member(Account):
         order.set_status(status)
         order.update_in_DB()
 
-        if status == OrderStatus.FILLED or status == OrderStatus.CANCELLEd:
+        if status in [OrderStatus.FILLED, OrderStatus.CANCELLEd]:
             self.active_orders.remove(order_id)

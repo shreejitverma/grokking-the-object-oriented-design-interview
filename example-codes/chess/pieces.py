@@ -34,13 +34,13 @@ class Piece:
         raise NotImplementedError
 
     def symbol(self):
-        black_color_prefix = '\u001b[31;1m'
-        white_color_prefix = '\u001b[34;1m'
         color_suffix = '\u001b[0m'
         retval = self._symbol_impl()
         if self.color == Piece.BLACK:
+            black_color_prefix = '\u001b[31;1m'
             retval = black_color_prefix + retval + color_suffix
         else:
+            white_color_prefix = '\u001b[34;1m'
             retval = white_color_prefix + retval + color_suffix
         return retval
 

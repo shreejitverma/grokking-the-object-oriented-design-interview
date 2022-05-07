@@ -11,7 +11,7 @@ class InputRender:
 
 class ConsoleRender(InputRender):
     def render(self, game):
-        for i in reversed(range(0, game.board_size)):
+        for i in reversed(range(game.board_size)):
             self._draw_board_line(i, game.pieces, game.board_size)
         self._draw_bottom_line(game.board_size)
 
@@ -19,7 +19,7 @@ class ConsoleRender(InputRender):
         print(string)
 
     def _draw_time_line(self, countdown_white, countdown_black):
-        print("Time remaining: {}s W / B {}s".format(countdown_white, countdown_black))
+        print(f"Time remaining: {countdown_white}s W / B {countdown_black}s")
 
     def _draw_board_line(self, line_number, pieces, board_size):
         empty_square = " "
@@ -30,7 +30,7 @@ class ConsoleRender(InputRender):
 
         legend = "{:<2} ".format(line_number + 1)
         print(legend, end='')
-        for i in range(0, board_size):
+        for i in range(board_size):
             is_black = (i + black_first_offset) % 2
             prefix = black_square_prefix if is_black else white_square_prefix
             contents = empty_square
@@ -45,6 +45,6 @@ class ConsoleRender(InputRender):
     def _draw_bottom_line(self, board_size):
         vertical_legend_offset = 3
         line = " " * vertical_legend_offset
-        for i in range(0, board_size):
+        for i in range(board_size):
             line += chr(ord("a") + i)
         print(line)

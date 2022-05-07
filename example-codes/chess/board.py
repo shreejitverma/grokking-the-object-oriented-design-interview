@@ -29,10 +29,9 @@ class ChessBoard:
             self._pieces.append(piece_black)
 
     def get_piece(self, position: ChessPosition) -> Piece:
-        for piece in self._pieces:
-            if piece.position == position:
-                return piece
-        return None
+        return next(
+            (piece for piece in self._pieces if piece.position == position), None
+        )
 
     def beam_search_threat(self, start_position: ChessPosition, own_color, increment_x: int, increment_y: int):
         threatened_positions = []
@@ -66,7 +65,7 @@ class ChessBoard:
             if free_only:
                 return None
             return curr_position if curr_piece.color != own_color else None
-        return curr_position if not threat_only else None
+        return None if threat_only else curr_position
 
     @property
     def pieces(self):

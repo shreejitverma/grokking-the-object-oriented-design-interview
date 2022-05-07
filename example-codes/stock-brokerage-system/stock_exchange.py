@@ -14,5 +14,4 @@ class StockExchange:
             StockExchange.instance = StockExchange.__OnlyOne()
 
     def place_order(self, order):
-        return_status = self.get_instance().submit_order(Order)
-        return return_status
+        return self.get_instance().submit_order(Order)

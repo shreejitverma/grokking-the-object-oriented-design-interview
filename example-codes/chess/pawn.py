@@ -12,22 +12,44 @@ class Pawn(Piece):
         self._moved = False
 
     def get_threatened_positions(self, board):
-        positions = []
         increments = Pawn.SPOT_INCREMENTS_TAKE
-        for increment in increments:
-            positions.append(board.spot_search_threat(self._position, self._color, increment[0], increment[1] if self.color == Piece.WHITE else (-1) * increment[1]))
+        positions = [
+            board.spot_search_threat(
+                self._position,
+                self._color,
+                increment[0],
+                increment[1] if self.color == Piece.WHITE else (-1) * increment[1],
+            )
+            for increment in increments
+        ]
+
         positions = [x for x in positions if x is not None]
         return positions
 
     def get_moveable_positions(self, board):
-        positions = []
         increments = Pawn.SPOT_INCREMENTS_MOVE if self._moved else Pawn.SPOT_INCREMENTS_MOVE_FIRST
-        for increment in increments:
-            positions.append(board.spot_search_threat(self._position, self._color, increment[0], increment[1] if self.color == Piece.WHITE else (-1) * increment[1], free_only=True))
+        positions = [
+            board.spot_search_threat(
+                self._position,
+                self._color,
+                increment[0],
+                increment[1] if self.color == Piece.WHITE else (-1) * increment[1],
+                free_only=True,
+            )
+            for increment in increments
+        ]
 
         increments = Pawn.SPOT_INCREMENTS_TAKE
-        for increment in increments:
-            positions.append(board.spot_search_threat(self._position, self._color, increment[0], increment[1] if self.color == Piece.WHITE else (-1) * increment[1], threat_only=True))
+        positions.extend(
+            board.spot_search_threat(
+                self._position,
+                self._color,
+                increment[0],
+                increment[1] if self.color == Piece.WHITE else (-1) * increment[1],
+                threat_only=True,
+            )
+            for increment in increments
+        )
 
         positions = [x for x in positions if x is not None]
         return positions

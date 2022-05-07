@@ -4,7 +4,7 @@ class Product:
         self.__maxprice = 900
 
     def sell(self):
-        print("Selling Price: {}".format(self.__maxprice))
+        print(f"Selling Price: {self.__maxprice}")
 
     def set_max_price(self, price):
         self.__maxprice = price
